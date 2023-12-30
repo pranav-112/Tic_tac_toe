@@ -15,11 +15,11 @@ class Main {
     Scanner sc = new Scanner(System.in);
 
     while(!gameover){
+      if(!gameover&&ifDrawn(board)){
+          System.out.println("The match is drawn");
+          break;
+      }
         printBoard(board);
-        if(!gameover&&ifDrawn(board)){
-            System.out.println("The match is drawn");
-            break;
-        }
         System.out.print("Player "+player+" move: ");
         int row = sc.nextInt();
         int col = sc.nextInt();
@@ -33,7 +33,7 @@ class Main {
                 player=(player=='X') ? 'O' : 'X';
             }
         }
-        
+
         else{
             System.err.println("Invalid move! Try again :(");
         }
