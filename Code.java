@@ -10,15 +10,19 @@ class Main {
     }
     //first player
     char player = 'X';
+    //to know if someone won
     boolean gameover = false;
     Scanner sc = new Scanner(System.in);
 
     while(!gameover){
         printBoard(board);
+        if(!gameover&&ifDrawn(board)){
+            System.out.println("The match is drawn");
+            break;
+        }
         System.out.print("Player "+player+" move: ");
         int row = sc.nextInt();
         int col = sc.nextInt();
-
         if(board[row][col]==' '){
             board[row][col]=player;
             gameover = havewon(board, player);
@@ -28,13 +32,13 @@ class Main {
             else{
                 player=(player=='X') ? 'O' : 'X';
             }
-            }
+        }
+        
         else{
             System.err.println("Invalid move! Try again :(");
         }
-        //printBoard(board);
     }
-
+    printBoard(board);
   }
 
   //to check if someone has won
@@ -61,6 +65,18 @@ class Main {
             return true;
         }
     return false;
+  }
+
+  //to check if draw
+  public static boolean ifDrawn(char[][] board){
+    for(int row = 0; row < board.length; row++){
+        for(int col = 0; col < board[row].length; col++){
+            if(board[row][col]==' '){
+                return false;
+            }
+        }
+    }
+    return true;
   }
 
   //to print the board
